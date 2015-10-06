@@ -52,7 +52,7 @@ while row < oh - (ph-1)
         
         % Get the template of the current part of the image with just the 
         %  top and left part having pixels already filled (overlap)
-        template = out(row:row+ph-1, col:col+pw-1);
+        template = out(row:row+ph-1, col:col+pw-1,:);
         
         
         

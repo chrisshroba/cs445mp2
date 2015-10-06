@@ -9,6 +9,9 @@ out = zeros(ow,oh,3, 'uint8');
 
 samplesize = size(sample);
 
+sh = samplesize(1);
+sw = samplesize(2);
+
 
 % 
 max_part = samplesize(1:2) - patchsize;
@@ -57,8 +60,8 @@ while row < oh - (ph-1)
         
         % Get the template of the current part of the image with just the 
         %  top and left part having pixels already filled (overlap)
-        template = out(row:row+ph-1, col:col+pw-1);
-        template3d = out(row:row+ph-1, col:col+pw-1,:);
+        template = out(row:row+ph-1, col:col+pw-1,:);
+%         template3d = out(row:row+ph-1, col:col+pw-1,:);
         
         
         top = true;
@@ -74,7 +77,7 @@ while row < oh - (ph-1)
         else
             cost_image = ssd_patch2(sample, mask, template);
         end
-        
+        1
 %         imagesc(cost_image);
         
         
@@ -92,8 +95,8 @@ while row < oh - (ph-1)
             slice = sample(sr:sr+ph-1, sc:sc+pw-1,1:3);
 
             
-            cut_slice = get_optimal_patch(template3d, slice, top, left, overlap);
-            mean(mean(mean(cut_slice)))
+            cut_slice = get_optimal_patch(template, slice, top, left, overlap);
+            mean(mean(mean(cut_slice)));
             if (mean(mean(mean(cut_slice))) < 254)
                 break
             end

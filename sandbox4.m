@@ -1,13 +1,16 @@
-square = imread('res/square.png');
-circle = imread('res/circle.png');
+close all;
+% rng(1);
+[A, map] = imread('res/feynman.tiff');
+size(A)
+tic
 
-diff = sum((square-circle).^2,3);
+Q = quilt_cut(A,[320 320], [45 45], 10, 50);
 
 
-gc = transpose(given_cut(transpose(diff)));
+% Q = quilt_cut(A,[300 300], [51 51],2, 3);
 
-combined(:,:,1) = uint8(gc) .* square(:,:,1) + uint8(~gc) .* circle(:,:,1);
-combined(:,:,2) = uint8(gc) .* square(:,:,2) + uint8(~gc) .* circle(:,:,2);
-combined(:,:,3) = uint8(gc) .* square(:,:,3) + uint8(~gc) .* circle(:,:,3);
+% Q = quilt_random(A,[900 900], [101 101]);
+toc
+imshow(Q,map)
 
-imshow(combined);
+% quilt_simple(sample, outsize, patchsize, overlap, tol)
