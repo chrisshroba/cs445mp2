@@ -1,5 +1,5 @@
-function [ out ] = get_optimal_patch(existing_part, new_patch, top, left, overlap)
-    ps = size(existing_part);
+function [ out ] = get_optimal_patch(existing_patch, new_patch, top, left, overlap)
+    ps = size(existing_patch);
     h = ps(1);
     w = ps(2);
 %     mask = ones(h,w);
@@ -7,7 +7,7 @@ function [ out ] = get_optimal_patch(existing_part, new_patch, top, left, overla
     top_mask = ones(h,w);
     
     if(left == true)
-        left_part1 = existing_part(:,1:overlap);
+        left_part1 = existing_patch(:,1:overlap);
         left_part2 = new_patch(:,1:overlap);
         
         diff = sum((left_part1-left_part2).^2,3);
@@ -20,8 +20,8 @@ function [ out ] = get_optimal_patch(existing_part, new_patch, top, left, overla
         
     end
     if(top == true)
-        top_part1 = existing_part(1:overlap,:);
-        top_part2 = new_patch(1:overlap,:);
+        top_part1 = existing_patch(1:overlap,:,:);
+        top_part2 = new_patch(1:overlap,:,:);
         
         diff = sum((top_part1-top_part2).^2,3);
 
@@ -35,8 +35,8 @@ function [ out ] = get_optimal_patch(existing_part, new_patch, top, left, overla
 
     mask = uint8(top_mask&left_mask);
     
-    out(:,:,1) = uint8(mask) .* new_patch(:,:,1) + uint8(~mask) .* existing_part(:,:,1);
-    out(:,:,2) = uint8(mask) .* new_patch(:,:,2) + uint8(~mask) .* existing_part(:,:,2);
-    out(:,:,3) = uint8(mask) .* new_patch(:,:,3) + uint8(~mask) .* existing_part(:,:,3);
+    out(:,:,1) = uint8(mask) .* new_patch(:,:,1) + uint8(~mask) .* existing_patch(:,:,1);
+    out(:,:,2) = uint8(mask) .* new_patch(:,:,2) + uint8(~mask) .* existing_patch(:,:,2);
+    out(:,:,3) = uint8(mask) .* new_patch(:,:,3) + uint8(~mask) .* existing_patch(:,:,3);
     
 end

@@ -1,7 +1,12 @@
 close all;
-[A, map] = imread('res/fire.jpg');
+% rng(1);
+[A, map] = imread('res/google.jpg');
+size(A)
 tic
-Q = quilt_simple(A,[300 300], [75 75],8, 4);
+
+Q = quilt_cut(A,[200 200], [43 43],2, 50);
+
+
 % Q = quilt_cut(A,[300 300], [51 51],2, 3);
 
 % Q = quilt_random(A,[900 900], [101 101]);
