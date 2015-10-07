@@ -1,10 +1,12 @@
 close all;
-% rng(1);
-[A, map] = imread('res/tree.png');
+rng(1);
+[A, map] = imread('res/foliage.jpg');
 size(A)
 tic
 
-Q = quilt_cut(A,[320 320], [45 45], 10, 50);
+patchsize = 31;
+
+Q = quilt_cut(A,[240 240], [patchsize patchsize], uint8(patchsize/6), 5);
 
 
 % Q = quilt_cut(A,[300 300], [51 51],2, 3);
