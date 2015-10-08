@@ -53,7 +53,7 @@ while row < oh - (ph-1)
             out(row:row+pw-1, col:col+ph-1,:) = slice;
             
 
-            col = col + pw - overlap;
+            col = col + pw - double(overlap);
 
             continue
         end
@@ -75,7 +75,7 @@ while row < oh - (ph-1)
             left = false;
             cost_image = ssd_patch2(sample, leftmask, template);
         else
-            cost_image = ssd_patch2(sample, mask, template);
+            cost_image = ssd_patch2(sample, topmask, template)+ssd_patch2(sample, leftmask, template);
         end
         
 %         imagesc(cost_image);
@@ -110,12 +110,12 @@ while row < oh - (ph-1)
         
         out(row:row+pw-1, col:col+ph-1,:) = cut_slice;
         
-        col = col + pw - overlap;
+        col = col + pw - double(overlap);
         
 %         imagesc(out)
         
     end
-    row = row + ph - overlap;
+    row = row + ph - double(overlap);
     
 end
 

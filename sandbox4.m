@@ -1,21 +1,21 @@
 % ============== Paramaters ============== %
 % Texture file
-texture_path = 'res/sand2.jpg';
+texture_path = 'res/dots.jpg';
 
 % File to texture
-target_path = 'res/me3.png';
+target_path = 'res/me2.png';
 
 % Texturing <-------------------> Blending %
-alpha = .30;
+alpha = .00;
 
 % Pick slice from this many lowest samples %
-num_samples = 5;
+num_samples = 1;
 
 % Size of patches
-patchsize = 105;
+patchsize = 21;
 
 overlap = uint8(patchsize/6);
-% overlap = uint8(patchsize/6)
+% overlap = uint8(1)
 
 % dbstop if error;
 close all;

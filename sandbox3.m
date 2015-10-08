@@ -1,12 +1,13 @@
 close all;
 rng(1);
-[A, map] = imread('res/foliage.jpg');
+[A, map] = imread('res/clouds.jpg');
 size(A)
 tic
 
 patchsize = 31;
+outputsize = 960;
 
-Q = quilt_cut(A,[240 240], [patchsize patchsize], uint8(patchsize/6), 5);
+Q = quilt_cut(A,[outputsize outputsize], [patchsize patchsize], uint8(patchsize/3), 3);
 
 
 % Q = quilt_cut(A,[300 300], [51 51],2, 3);

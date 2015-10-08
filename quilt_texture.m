@@ -38,7 +38,7 @@ while row < oh - (ph-1)
         % populate the first patch into the output
         if ((col == 1) && (row == 1))
             while true
-                'trying'
+                'Starting'
                 rand_r = randi(max_part_r, 1);
                 rand_c = randi(max_part_c, 1);
 
@@ -80,7 +80,7 @@ while row < oh - (ph-1)
             left = false;
             block_overlap_cost_image = ssd_patch2(texture, leftmask, template);
         else
-            block_overlap_cost_image = ssd_patch2(texture, mask, template);
+            block_overlap_cost_image = ssd_patch2(texture, topmask, template)+ssd_patch2(texture, leftmask, template);
         end
         
         % Now, compute the 
@@ -88,12 +88,12 @@ while row < oh - (ph-1)
         
 
 
-        target_template = target(row:row+ph-1, col:col+pw-1,:);
+        target_template = target_corr_map(row:row+ph-1, col:col+pw-1,:);
         mask = ones(ph,pw);
         
         %ssd_patch2(I, M, T)
 
-        target_correlation_cost_image = ssd_patch2(texture, mask, target_template);        
+        target_correlation_cost_image = ssd_patch2d(texture_corr_map, mask, target_template);        
         
 %         [row,col]
         cost_image = alpha * block_overlap_cost_image + (1 - alpha) * target_correlation_cost_image;
